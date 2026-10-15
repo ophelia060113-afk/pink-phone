@@ -1,0 +1,258 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 20px 12px;
+  background: #fff0f5;
+  color: #75485a;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.chat {
+  width: 100%;
+  max-width: 500px;
+  margin: 12px auto;
+  padding: 24px 18px;
+  background: #fffafd;
+  border: 1px solid #ffd6e1;
+  border-radius: 28px;
+  box-shadow: 0 8px 24px #f3c6d533;
+}
+
+h2 {
+  color: #df7295;
+  text-align: center;
+  font-size: 28px;
+}
+
+.subtitle {
+  text-align: center;
+  color: #ad7a8c;
+  line-height: 1.7;
+}
+
+.mood {
+  margin: 22px 0;
+  padding: 18px 14px;
+  background: #ffe5ee;
+  border: 1px solid #ffd0df;
+  border-radius: 24px;
+  text-align: center;
+}
+
+.mood-title {
+  color: #d9678d;
+  font-size: 19px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+#moodText, #moodNote {
+  line-height: 1.8;
+
+  overflow-wrap: anywhere;
+  margin: 10px 0;
+}
+
+.bubble {
+  width: fit-content;
+  max-width: 90%;
+  margin: 14px 0;
+  padding: 12px 16px;
+  background: #ffe1eb;
+  border-radius: 22px 22px 22px 8px;
+  overflow-wrap: anywhere;
+  animation: popIn 0.35s ease;
+}
+
+.input-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+input {
+  min-width: 0;
+  flex: 1;
+  padding: 12px;
+  border: 1px solid #f3b7cb;
+  border-radius: 24px;
+  font-size: 16px;
+}
+
+button {
+  padding: 12px 16px;
+  border: none;
+  border-radius: 24px;
+  background: #e985a5;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+@keyframes popIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 小爱心：轻轻呼吸 */
+.chat h2 {
+
+  animation: heartBreath 2s ease-in-out infinite;
+}
+
+@keyframes heartBreath {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.04);
+  }
+}
+
+/* 聊天气泡：出现时轻轻弹一下 */
+.bubble {
+  animation: bubblePop 0.4s cubic-bezier(0.2, 0.8, 0.2, 1.2) both;
+  transform-origin: left bottom;
+}
+
+@keyframes bubblePop {
+  0% {
+    opacity: 0;
+    transform: scale(0.85) translateY(8px);
+  }
+  70% {
+    opacity: 1;
+    transform: scale(1.03) translateY(-2px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+button {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  transition: transform 0.15s ease, background 0.2s ease;
+}
+
+button:active,
+button:focus {
+  transform: scale(0.94);
+  background: #d96d91;
+}
+
+
+/* 心情卡片：缓缓浮动 */
+.mood {
+  animation: moodFloat 3s ease-in-out infinite;
+}
+
+@keyframes moodFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+/* 尊重系统的减少动态效果设置 */
+@media (prefers-reduced-motion: reduce) {
+  .chat h2,
+  .bubble,
+  .mood {
+    animation: none;
+  }
+
+  button {
+    transition: none;
+  }
+}
+
+
+
+
+/* 粉色按钮光晕 */
+button {
+  box-shadow: 0 3px 10px rgba(238, 143, 177, 0.18);
+  transition: transform 0.15s ease,
+              background 0.2s ease,
+              box-shadow 0.2s ease;
+}
+
+/* 按下时的粉色光晕 */
+button:active {
+  box-shadow: 0 0 16px rgba(255, 145, 190, 0.65);
+}
+
+/* 宝宝发送的消息：靠右 */
+.user-bubble {
+  align-self: flex-end;
+  margin-left: auto;
+  margin-right: 0;
+  background: #f6d5e2;
+  border-radius: 18px 18px 5px 18px;
+  max-width: 78%;
+  width: fit-content;
+}
+
+
+#messages {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.message-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  width: 100%;
+}
+
+.user-row {
+  justify-content: flex-end;
+}
+
+.assistant-row {
+  justify-content: flex-start;
+}
+
+.avatar {
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #fbe7ef;
+  font-size: 18px;
+}
+
+.message-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-width: 78%;
+  min-width: 0;
+}
+
+.message-content .bubble {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.message-time {
+  font-size: 11px;
+  color: #b49aa6;
+  padding: 0 5px;
+}
+
+.user-row .message-time {
+  text-align: right;
+}
